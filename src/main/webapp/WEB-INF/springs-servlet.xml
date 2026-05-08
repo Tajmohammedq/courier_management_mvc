@@ -1,0 +1,46 @@
+<beans 
+xmlns="http://www.springframework.org/schema/beans" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:p="http://www.springframework.org/schema/p" 
+xmlns:tx="http://www.springframework.org/schema/tx" 
+xmlns:mvc="http://www.springframework.org/schema/mvc" 
+xmlns:context="http://www.springframework.org/schema/context" 
+xmlns:util="http://www.springframework.org/schema/util" 
+xsi:schemaLocation="http://www.springframework.org/schema/beans 
+https://www.springframework.org/schema/beans/spring-beans.xsd 
+http://www.springframework.org/schema/context 
+https://www.springframework.org/schema/context/spring-context.xsd 
+http://www.springframework.org/schema/tx 
+https://www.springframework.org/schema/tx/spring-tx.xsd 
+http://www.springframework.org/schema/mvc 
+https://www.springframework.org/schema/mvc/spring-mvc.xsd 
+http://www.springframework.org/schema/util 
+https://www.springframework.org/schema/util/spring-util.xsd ">
+
+ <mvc:annotation-driven/>
+ <context:component-scan base-package="controller,Exception"/>
+ <tx:annotation-driven/>
+ 
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" name="viewResolver">
+ 	<property name="prefix" value="/WEB-INF/views"></property>
+ 	<property name="suffix" value=".jsp"></property>
+ </bean>
+
+
+ <bean class="Dao.SignupDao" name="signupdao">
+ </bean>
+ <bean  class="service.SignupService" name="signupservice">
+ 	<property name="signupDao" ref="signupdao"></property>
+ </bean>
+ <bean class="Dao.EmployeeDao" name="employeedao">
+ </bean>
+ <bean class="service.EmployeeService" name="employeesignup">
+ <property name="employeedao" ref="employeedao"></property>
+ </bean>
+ <bean class="Dao.OriginandDestinationDao" name="origindao">
+ </bean>
+ <bean class="service.OriginandDestinationServices" name="originservice">
+ <property name="dao" ref="origindao"></property>
+ </bean>
+
+</beans>
