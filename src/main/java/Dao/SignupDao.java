@@ -2,20 +2,19 @@ package Dao;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
+import controller.signupcontroller;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Repository;
-
-import Exception.EmailAlreadyExist;
+import org.slf4j.Logger;
 import entity.SignupTable;
-
+import org.slf4j.LoggerFactory;
 
 
 public class SignupDao extends CreateFactory {
-	
-	
+
+	private static final Logger logger =
+			LoggerFactory.getLogger(SignupDao.class);
 	public void adduser(SignupTable signup) {
 	
 			System.out.println("this is add user");
@@ -30,10 +29,12 @@ public class SignupDao extends CreateFactory {
 	}
 
 	public SignupTable getuser(String mail) {
+		logger.info("Fetching user from DB");
 		Session session=setsession().openSession();
 		SignupTable user=(SignupTable) session.get(SignupTable.class, mail);
 		session.close();
 		CreateFactory.closefactory();
+		logger.info("Found user from from DB");
 		return user;
 	}
 
@@ -41,9 +42,9 @@ public class SignupDao extends CreateFactory {
 		// TODO Auto-generated method stub
 		Session session=CreateFactory.setsession().openSession();
 		Transaction tx=session.beginTransaction();
-		System.out.println("before getting the usere");
+		logger.info("before getting the usere");
 		SignupTable user=(SignupTable) session.get(SignupTable.class,mail);
-		System.out.println("we got the usere");
+		logger.info("we got the usere");
 		user.setEmail(signup.getEmail());
 		user.setPhone(signup.getPhone());
 		user.setFirstname(signup.getFirstname());

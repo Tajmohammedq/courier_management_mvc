@@ -38,12 +38,11 @@ public class signupcontroller {
 //		ResponseEntity<String> s=rest.getForEntity("http://localhost:9090/encrypt", String.class);
 //		System.out.println("output="+s.getBody());
 //	}
-	
-	
-	@PostMapping(path ="/signup", consumes=MediaType.APPLICATION_JSON_VALUE)
+
+
+	@PostMapping(path ="/signup", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 
 	public void signup(@RequestBody SignupTable request) {
-		System.out.println("Sign in request is hitted");
 		logger.info("Sign in request recieved for user");
 //		throw new RuntimeException("CHECK IF CONTROLLER HIT");
 		signup.adduser(request);
@@ -59,7 +58,7 @@ public class signupcontroller {
 		
 	}
 	
-	@PostMapping(path ="/update/{mail}", consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path ="/update/{mail}", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public void update(@RequestBody SignupTable signup1,@PathVariable String mail) {
 		signup.update(signup1,mail);
 	}

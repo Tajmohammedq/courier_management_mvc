@@ -21,7 +21,7 @@ import service.EmployeeService;
 public class EmployeeLogin {
 	@Autowired
 	private EmployeeService employe;
-	@PostMapping(path="/employee", consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path="/employee", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public void employeesignup(@RequestBody EmployeeTable employee) {
 		employe.addemployee(employee);	
 	}
@@ -37,7 +37,7 @@ public class EmployeeLogin {
 		
 	}
 	
-	@PostMapping(path="/employeeupdate/{email}",consumes=MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path="/employeeupdate/{email}",consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
 	public void update(@RequestBody EmployeeTable employee,@PathVariable String email) {
 		employe.update(employee,email);
 	}
