@@ -74,11 +74,17 @@ public class EmployeeService {
 	public void update(EmployeeTable employee, String email) {
 		try {
 			employee.setImage(getDefaultImage(employee.getImage()));
-			try {
-				employee.setPassword(getencryptedpassword(employee.getPassword()));
+			String password = employee.getPassword();
+			if (password != null && !password.trim().isEmpty()) {
+				try {
+					employee.setPassword(getencryptedpassword(password));
+				}
+				catch(Exception e) {
+					System.out.println("got the exception");
+				}
 			}
-			catch(Exception e) {
-				System.out.println("got the exception");
+			else {
+				employee.setPassword(null);
 			}
 			employeedao.updateuser( employee, email);
 		}

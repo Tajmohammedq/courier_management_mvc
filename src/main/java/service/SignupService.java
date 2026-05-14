@@ -87,11 +87,17 @@ public class SignupService {
 	public void update(SignupTable signup,String mail) {
 		try {
 			signup.setImage(getDefaultImage(signup.getImage()));
-			try {
-				signup.setPassword(getencryptedpassword(signup.getPassword()));
+			String password = signup.getPassword();
+			if (password != null && !password.trim().isEmpty()) {
+				try {
+					signup.setPassword(getencryptedpassword(password));
+				}
+				catch(Exception e) {
+					System.out.println("got the exception");
+				}
 			}
-			catch(Exception e) {
-				System.out.println("got the exception");
+			else {
+				signup.setPassword(null);
 			}
 			signupDao.updateuser( signup, mail);
 		}

@@ -49,10 +49,12 @@ public class SignupDao extends CreateFactory {
 		user.setPhone(signup.getPhone());
 		user.setFirstname(signup.getFirstname());
 		user.setLastname(signup.getLastname());
-		if(signup.getImage()!=null) {
+		if(signup.getImage()!=null && !signup.getImage().trim().isEmpty()) {
 			user.setImage(signup.getImage());
 		}
-		user.setPassword(signup.getPassword());
+		if(signup.getPassword()!=null && !signup.getPassword().trim().isEmpty()) {
+			user.setPassword(signup.getPassword());
+		}
 		session.update(user);
 		tx.commit();
 		session.close();
