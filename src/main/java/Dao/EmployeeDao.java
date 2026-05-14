@@ -39,10 +39,12 @@ public class EmployeeDao extends CreateFactory {
 		user.setPhone(employee.getPhone());
 		user.setFirstname(employee.getFirstname());
 		user.setLastname(employee.getLastname());
-		if(employee.getImage()!=null) {
+		if(employee.getImage()!=null && !employee.getImage().trim().isEmpty()) {
 			user.setImage(employee.getImage());
 		}
-		user.setPassword(employee.getPassword());
+		if(employee.getPassword()!=null && !employee.getPassword().trim().isEmpty()) {
+			user.setPassword(employee.getPassword());
+		}
 		session.update(user);
 		tx.commit();
 		session.close();
