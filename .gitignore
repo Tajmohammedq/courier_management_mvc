@@ -5,3 +5,5 @@ target/
 .project
 .settings/
 out/
+secreats.properties
+src/main/resources/secreats.properties
