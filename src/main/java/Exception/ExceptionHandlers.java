@@ -20,6 +20,28 @@ public class ExceptionHandlers {
 		
 	}
 
+	@ExceptionHandler(value = {InvalidImageFile.class})
+	public ResponseEntity<Exceptionpayload> invalidImage(InvalidImageFile exception) {
+		Exceptionpayload payload = new Exceptionpayload(
+				exception.getMessage(),
+				HttpStatus.BAD_REQUEST);
+		return ResponseEntity
+				.status(HttpStatus.BAD_REQUEST)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.body(payload);
+	}
+
+	@ExceptionHandler(value = {ImageUploadFailed.class})
+	public ResponseEntity<Exceptionpayload> uploadFailed(ImageUploadFailed exception) {
+		Exceptionpayload payload = new Exceptionpayload(
+				exception.getMessage(),
+				HttpStatus.BAD_GATEWAY);
+		return ResponseEntity
+				.status(HttpStatus.BAD_GATEWAY)
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+				.body(payload);
+	}
+
 	@ExceptionHandler(value = {Exception.class})
 	public ResponseEntity<Exceptionpayload> generalError(Exception exception) {
 		Exceptionpayload payload = new Exceptionpayload(

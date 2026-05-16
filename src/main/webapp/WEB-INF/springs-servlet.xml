@@ -21,6 +21,10 @@ https://www.springframework.org/schema/util/spring-util.xsd ">
  <context:component-scan base-package="controller,Exception"/>
  <tx:annotation-driven/>
  
+ <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 	<property name="defaultEncoding" value="UTF-8"></property>
+ </bean>
+ 
   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" name="viewResolver">
  	<property name="prefix" value="/WEB-INF/views"></property>
  	<property name="suffix" value=".jsp"></property>
@@ -31,6 +35,8 @@ https://www.springframework.org/schema/util/spring-util.xsd ">
  </bean>
  <bean  class="service.SignupService" name="signupservice">
  	<property name="signupDao" ref="signupdao"></property>
+ </bean>
+ <bean class="service.CloudinaryImageService" name="cloudinaryImageService">
  </bean>
  <bean class="Dao.EmployeeDao" name="employeedao">
  </bean>
